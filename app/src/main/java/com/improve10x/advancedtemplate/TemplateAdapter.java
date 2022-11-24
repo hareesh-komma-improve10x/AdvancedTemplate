@@ -8,13 +8,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TemplateAdapter extends RecyclerView.Adapter<TemplateViewHolder> {
-    public ArrayList<Template> templateArrayList;
+    public List<Template> templateArrayList;
 
-    public void setData(ArrayList<Template> templates) {
+    public void setData(List<Template> templates) {
         templateArrayList = templates;
-        notifyDataSetChanged();
+        //notifyDataSetChanged();
     }
 
     @NonNull
