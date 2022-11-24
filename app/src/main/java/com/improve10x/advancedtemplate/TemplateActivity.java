@@ -30,6 +30,11 @@ public class TemplateActivity extends AppCompatActivity {
         handleAddBtn();
         setUpData();
         setUpTemplateList();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         fetchTasks();
     }
 

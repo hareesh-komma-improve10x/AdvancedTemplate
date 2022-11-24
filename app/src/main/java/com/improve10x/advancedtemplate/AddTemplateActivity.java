@@ -7,6 +7,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AddTemplateActivity extends AppCompatActivity {
 
     @Override
@@ -22,7 +26,31 @@ public class AddTemplateActivity extends AppCompatActivity {
         addBtn.setOnClickListener(view -> {
             EditText plainTxt = findViewById(R.id.plain_txt);
             String plain = plainTxt.getText().toString();
-            Toast.makeText(this, "correct", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, plain, Toast.LENGTH_SHORT).show();
+            createTasks(plain);
+
         });
+    }
+    private void createTasks(String name) {
+        Template template = new Template();
+        template.message = name;
+
+        TemplatesApi templatesApi = new TemplatesApi();
+        TemplatesService templatesService = templatesApi.createTemplatesService();
+        Call<Template> call = templatesService.createTasks(template);
+        call.enqueue(new Callback<Template>() {
+            @Override
+            public void onResponse(Call<Template> call, Response<Template> response) {
+                Toast.makeText(AddTemplateActivity.this, "Completed", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<Template> call, Throwable t) {
+                Toast.makeText(AddTemplateActivity.this, "Something went Wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 }
